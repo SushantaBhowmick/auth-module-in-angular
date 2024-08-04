@@ -1,0 +1,30 @@
+<google-map 
+height="80vh" 
+width="100vw" 
+[center]="center" 
+[zoom]="zoom"
+(mapClick)="drawPolyline($event)"
+[options]="mapOptions"
+>
+
+<map-polyline 
+*ngIf="drawP"
+[path]="vertices" 
+[options]="polylineOptions"
+/>
+
+<map-polygon
+#mapPolygon="mapPolygon"
+*ngFor="let polygon of polygonVertices;let i =index"
+[paths]="polygon"
+[options]="polygonOptions"
+(polygonMouseover)="onPolygonClick(polygon,i)"
+/>
+
+<map-info-window *ngIf="infoWindowPosition" [position]="infoWindowPosition">
+    Info Window content
+  </map-info-window>
+
+</google-map>
+<button (click)="drawPL()">{{ drawP ? 'Stop Drawing' : 'Start Drawing' }}</button>
+<button (click)="createPolygon()" [disabled]="vertices.length < 3">Create Polygon</button>

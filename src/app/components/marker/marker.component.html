@@ -1,0 +1,28 @@
+<google-map
+height="400px"
+  width="750px"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="addMarker($event)"
+>
+<!-- <map-marker *ngFor="let position of markerPositions;"
+[position]="position"
+>
+
+</map-marker> -->
+
+<!-- @for (position of markerPositions; track position) {
+    <map-marker 
+    [position]="position"
+    />
+} -->
+@for (position of markerPositions; track position) {
+    <map-marker 
+    #marker="mapMarker"
+    [position]="position"
+    (mapClick)="openWiindow(marker)"
+    />
+}
+<map-info-window>info windo content</map-info-window>
+
+</google-map>
